@@ -4,9 +4,9 @@ import fs from "fs";
 
 const getRequestWithCertificate = async () => {
   try {
-    const cert = fs.readFileSync("../certs/client.pem");
-    const key = fs.readFileSync("../certs/client.key");
-    const hostName = "localhost:8443";
+    const cert = fs.readFileSync("certs/my_client.pem");
+    const key = fs.readFileSync("certs/my_client.key");
+    const hostName = "zwfqaqysxb.execute-api.sa-east-1.amazonaws.com/production";
     const httpsAgent = new https.Agent({
       cert,
       key,
