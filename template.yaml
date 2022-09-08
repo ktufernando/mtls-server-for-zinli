@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  API For Mutual Authentication
+
+Resources:
+  MTLSServerLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Events:
+        BaseEvent:
+          Type: Api
+          Properties:
+            RestApiId:
+              Ref: MTLSServerGateway
+            Path: /
+            Method: ANY
+        ProxyEvent:
+          Type: Api
+          Properties:
+            RestApiId:
+              Ref: MTLSServerGateway
+            Path: /{proxy+}
+            Method: ANY
+      FunctionName: mutual-tls-server
+      CodeUri: ./
+      Handler: lambda.handler
+      Runtime: nodejs16.x
+      Timeout: 300
+      MemorySize: 128
+      Description: Mutual authentication Lambda created fron SAM
+      Role: !Sub arn:aws:iam::${AWS::AccountId}:role/role-for-lambda-functions-with-sam
+
+  ViviendaInversaGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      Description: Mutual authentication AG created fron SAM
+      StageName: production
+      OpenApiVersion: "3.0.0"
+      Cors:
+        AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+        AllowHeaders: "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token,x-token'"
+        AllowOrigin: "'*'"
+      EndpointConfiguration:
+        Type: EDGE
