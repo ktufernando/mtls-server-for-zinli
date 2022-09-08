@@ -5,10 +5,9 @@
   "scripts": {
     "start": "node app.local.js",
     "build": "tsc",
-    "test": "node build/client.js"
+    "test": "node client.js"
   },
   "dependencies": {
-    "aws-serverless-express": "^3.4.0",
     "axios": "^0.27.2",
     "cors": "^2.8.5",
     "express": "^4.18.1",

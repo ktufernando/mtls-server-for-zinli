@@ -14,7 +14,7 @@ Para ejecutar la solución seguir los siguientes pasos:
 
 ```
 $ yarn install
-$ tsc
+$ yarn build
 $ yarn start
 ```
 
@@ -24,12 +24,26 @@ En otro terminal se puede ejecutar un test para comprobar el funcionamiento
 $ yarn test
 ```
 
-Alternativamente se puede reemplazar el archivo certs/client.crt por otro invalido para probar un certificado invalido.
+En la carpeta certs se encuentran los certificados a modo de comprender que son necesarias para su funcionamiento.
 
-> En la carpeta certs se encuentran los certificados
-> - ca.crt es el certificado root
-> - server.crt y server.csr son los del servidor
-> - client.crt es el certificado del cliente creado a partir del root, este solo se encuentra aqui para testeo.
+- `RootCA.pem` es el certicado para configurar en "Custom domain names" dentro de Api Gateway para la implementación de Mutual TLS authentication en AWS
+
+- `my_client.pem` y `my_client.key` son los archivos clientes que se envian en el request a la lambda solicitada. API Gateway los validará, si estos son validos, pasará la información a la Lambda agregando el objeto authentication dentro del requestContext:
+
+
+        "authentication": {
+            "clientCert": {
+                "clientCertPem": "-----BEGIN CERTIFICATE-----\nMIIEZTCCAk0CAQEwDQ...",
+                "issuerDN": "C=US,ST=Washington,L=Seattle,O=Amazon Web Services,OU=Security,CN=My Private CA",
+                "serialNumber": "1",
+                "subjectDN": "C=US,ST=Washington,L=Seattle,O=Amazon Web Services,OU=Security,CN=My Client",
+                "validity": {
+                    "notAfter": "Aug  5 00:28:21 2120 GMT",
+                    "notBefore": "Aug 29 00:28:21 2020 GMT"
+                }
+            }
+        }
+
 
 ### CI/CD
 
