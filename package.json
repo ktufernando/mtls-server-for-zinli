@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node build/app.local.js",
+    "build": "tsc",
     "test": "node build/client.js",
     "deploy": "serverless deploy"
   },
