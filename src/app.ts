@@ -9,9 +9,9 @@ app.use(cors());
 
 const serverOptions = {
 	// Certificate Settings
-    ca: fs.readFileSync(path.join(__dirname, '../../certs/ca.crt')),
-	cert: fs.readFileSync(path.join(__dirname, '../../certs/server.crt')),
-	key: fs.readFileSync(path.join(__dirname, '../../certs/server.key')),
+    ca: fs.readFileSync(path.join(__dirname, 'certs/ca.crt')),
+	cert: fs.readFileSync(path.join(__dirname, 'certs/server.crt')),
+	key: fs.readFileSync(path.join(__dirname, 'certs/server.key')),
 
 	// Cert-Based Mutual Auth settings
 	requestCert: true,

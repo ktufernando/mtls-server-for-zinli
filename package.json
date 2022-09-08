@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "node build/app.local.js",
+    "start": "node app.local.js",
     "build": "tsc",
-    "test": "node build/client.js",
-    "deploy": "serverless deploy"
+    "test": "node build/client.js"
   },
   "dependencies": {
     "aws-serverless-express": "^3.4.0",

@@ -30,3 +30,9 @@ Alternativamente se puede reemplazar el archivo certs/client.crt por otro invali
 > - ca.crt es el certificado root
 > - server.crt y server.csr son los del servidor
 > - client.crt es el certificado del cliente creado a partir del root, este solo se encuentra aqui para testeo.
+
+### CI/CD
+
+Este repositorio usa Github Actions como pipeline de CI/CD.
+El pipeline realiza el deploy en AWS, utilizando el cli SAM y Cloud Formation. 
+Asi mismo, el resultado termina siendo un despliegue de una función Lambda con su trigger de Api Gateway.
