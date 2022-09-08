@@ -7,7 +7,6 @@ on:
 
 jobs:
   call-workflow-aws-deply:
-    needs: call-workflow-run-tests
     uses: ./.github/workflows/aws-deploy.yml
     with:
       stage: production
